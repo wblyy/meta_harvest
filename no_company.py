@@ -27,10 +27,11 @@ for lrow in list(reader):
     try:        
         print '处理后：',album
         company_info=mydb.get_album_company(album)
-        company=company_info[0]
-        print '处理后：',album,company            
-        meta.update_album_company(album,company)
-        index_full=index_full+1
+        if company:
+            company=company_info[0]
+            print '处理后：',album,company            
+            meta.update_album_company(album,company)
+            index_full=index_full+1
 
     except Exception, e:
         index_error=index_error+1
