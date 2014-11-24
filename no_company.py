@@ -28,6 +28,9 @@ for lrow in list(reader):
 
         artist=lrow[1].decode('gbk').encode('UTF-8')
         artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
+
+        album=lrow[2].decode('gbk').encode('UTF-8')
+        
         album_id=mydb.get_song_album_id_163music(song,artist)
         album_company=mydb.get_album_company_by_id_163music(album_id)
         meta.update_album_company(album,album_company)
