@@ -3,7 +3,7 @@ import random
 import csv
 import MySQLdb
 import sys
-from mydb import Tieba
+from mydb import Tiedb
 from mydb import Meta
 
 
@@ -28,7 +28,7 @@ for lrow in list(reader):
         print '处理后：',song,artist            
         meta.update_artist_info(song,artist)
         index_full=index_full+1
-        
+
     except Exception, e:
         index_error=index_error+1
         print e,index_error
