@@ -38,6 +38,7 @@ for lrow in list(reader):
 
         for company in album_company:
             meta.update_album_company_by_song(song,artist,company)
+            print company
         print 'done'
         
 
