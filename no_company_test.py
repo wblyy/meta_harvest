@@ -32,10 +32,9 @@ for lrow in list(reader):
         album=lrow[2].decode('gbk').encode('UTF-8')
         print album
         album_id=mydb.get_song_album_id_163music(song,artist)
-        for aid in album_id:
-            print aid
-            album_company=mydb.get_album_company_by_id_163music(str(aid))
-
+        for id in album_id:
+            print id
+        album_company=mydb.get_album_company_by_id_163music(str(album_id))
         print album_company
         meta.update_album_company_by_song(song,artist,album_company)
         print 'done'
