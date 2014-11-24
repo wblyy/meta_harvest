@@ -27,7 +27,7 @@ for lrow in list(reader):
     try:        
         print '处理后：',album
         company_info=mydb.get_album_company(album)
-        if company:
+        if company_info:
             company=company_info[0]
             print '处理后：',album,company            
             meta.update_album_company(album,company)
