@@ -37,7 +37,7 @@ for lrow in list(reader):
         album_company=mydb.get_album_company_by_id_qqmusic(str(aid))
         for company in album_company:
             meta.update_album_company_by_song(song,artist,company)
-            print company.decode('utf-8')
+            print company
         
         print 'done'
         
