@@ -22,9 +22,9 @@ index_full=0
 for lrow in list(reader):
     index=index+1
     print '处理前:',lrow[0].decode('gbk'),index
-    try:
-        song_raw=lrow[0].decode('gbk').encode('UTF-8')
-        song==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song_raw)#去括号
+    song_raw=lrow[0].decode('gbk').encode('UTF-8')
+    song==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song_raw)#去括号
+    try:        
         song_info=mydb.get_artist_xiami(song)
         artist=song_info[0]
         print '处理后：',song,artist            
