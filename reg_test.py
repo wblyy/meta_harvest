@@ -14,7 +14,7 @@ proxy_dict=['http://113.11.198.163:2223/',
 			]
 
 meta_url = "http://www.xiami.com/search/album?key="+urllib.quote("心花路放 电影原声带")
-msg=requests.get(page_url,proxies={"http": random.choice(proxy_dict)}).text
+msg=requests.get(meta_url,proxies={"http": random.choice(proxy_dict)}).text
 album_url=re.findall('<p class="cover"><a class="CDcover100" href="(.*?)" title="">" onclick="'.decode('utf-8').encode('utf-8'), msg, re.DOTALL)
 print album_url
 #第一页筛子 #<p class="cover"><a class="CDcover100" href=" #" title="">
