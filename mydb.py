@@ -53,6 +53,8 @@ class Tiedb(Mydb):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_qqmusic where title=%s and artist=%s limit 1', (song, artist))
     def get_lyric(self, song_id):
         return self._query_row('select lyric from lyrics where song_id=%s', (song_id, ))
+    def get_artist_xiami(self,song):
+        return self._query_row('select artist from song_info_xiami where title=%s limit 1', (song, ))
       
 class Meta(Mydb):
     def __init__(self):
@@ -60,6 +62,9 @@ class Meta(Mydb):
 
     def update_album_info(self, album_name,song,artist):
         self._execute("update meta set album_name=%s where song=%s and artist=%s", (album_name,song,artist))
+    def update_artist_info(self,song,artist):
+        self._execute("update meta set artist=%s where song=%s", (song,))
+     
 
         
 if __name__ == "__main__":
@@ -69,18 +74,23 @@ if __name__ == "__main__":
         # print row
     # sys.exit(0)
     #print mydb.get_song_info("青花瓷","周杰伦")[0],mydb.get_song_info("青花瓷","周杰伦")[1],mydb.get_song_info("青花瓷","周杰伦")[2]
-    csvfile = file('meta_no_album.csv', 'rb')
+    csvfile = file('meta_no_album_again.csv', 'rb')
     reader = csv.reader(csvfile)
     index=0
     index_error=0
     index_full=0
     for lrow in list(reader):
         index=index+1
-        print lrow[0].decode('gbk'),lrow[1].decode('gbk'),'index:',index
+        print '处理前:',lrow[0].decode('gbk'),lrow[1].decode('gbk'),'index:',index
         try:
-            song_info=mydb.get_song_info_qqmusic(lrow[0].decode('gbk').encode('UTF-8'),lrow[1].decode('gbk').encode('UTF-8'))
             song=lrow[0].decode('gbk').encode('UTF-8')
+            song==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
+
             artist=lrow[1].decode('gbk').encode('UTF-8')
+            artist==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
+            song_info=mydb.get_song_info_qqmusic(song,artist)
+            print '处理后：',song,artist            
+
             album_id=song_info[0]
             album_name=song_info[1]
             download_url=song_info[2]
