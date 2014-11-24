@@ -30,10 +30,13 @@ for lrow in list(reader):
         artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
 
         album=lrow[2].decode('gbk').encode('UTF-8')
-
+        print album
         album_id=mydb.get_song_album_id_163music(song,artist)
+        print album_id
         album_company=mydb.get_album_company_by_id_163music(album_id)
+        print album_company
         meta.update_album_company_by_song(song,artist,album_company)
+        print 'done'
         
 
 
