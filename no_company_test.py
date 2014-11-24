@@ -35,8 +35,10 @@ for lrow in list(reader):
         for aid in album_id:
             print aid
         album_company=mydb.get_album_company_by_id_qqmusic(str(aid))
-        print album_company
-        meta.update_album_company_by_song(song,artist,album_company)
+        for company in album_company:
+            meta.update_album_company_by_song(song,artist,company)
+            print album_company
+        
         print 'done'
         
 
