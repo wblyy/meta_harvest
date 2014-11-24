@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
             artist=lrow[1].decode('gbk').encode('UTF-8')
             artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
-            song_info=mydb.get_song_info_qqmusic(song,artist)
+            song_info=mydb.get_song_info_xiami(song,artist)
             print '处理后：',song,artist            
 
             album_id=song_info[0]
