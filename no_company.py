@@ -26,11 +26,41 @@ for lrow in list(reader):
     #album=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',album_raw)#去括号
     try:        
         print '处理后：',album
-        company_info=mydb.get_album_company(album)
+
+        if '好声音' in album:
+            #梦响强音
+            meta.update_album_company(album,'梦响强音')
+        elif 'M-net' in album
+            meta.update_album_company(album,'SM')
+        elif '好歌曲' in album
+            meta.update_album_company(album,'通力时代')
+        elif '雪碧' in album
+            meta.update_album_company(album,'可口可乐')
+        elif '最美和声' in album
+            meta.update_album_company(album,'北京卫视')
+        elif '我是歌手' in album 
+            meta.update_album_company(album,'湖南卫视')
+        elif '华语单曲榜' in album
+            meta.update_album_company(album,'KKBOX')
+        elif '在线热搜（华语）系列' in album
+            meta.update_album_company(album,'QQ音乐')
+        elif '新歌速递' in album
+            meta.update_album_company(album,'QQ音乐')
+        elif '最强音' in album
+            meta.update_album_company(album,'湖南卫视')
+        elif '直通春晚' in album
+            meta.update_album_company(album,'恒大音乐')
+
+
+
+
+
+
+        #company_info=mydb.get_album_company(album)
         if company_info:
             company=company_info[0]
             print '处理后：',album,company            
-            meta.update_album_company(album,company)
+            
             index_full=index_full+1
 
     except Exception, e:
