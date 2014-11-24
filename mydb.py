@@ -48,6 +48,9 @@ class Tiedb(Mydb):
 
     def get_album_info(self, album_id):
         return self._query_row('select company,publishDate from album_info where id=%s', (album_id, ))
+    def get_album_company(self, album_name):
+        return self._query_row('select company from album_info_163music where album=%s', (album_name, ))
+
     def get_song_info_xiami(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_xiami where title=%s and artist=%s limit 1', (song, artist))
     def get_proxim_song_info_xiami(self,song, artist):
@@ -71,6 +74,8 @@ class Meta(Mydb):
 
     def update_album_info(self, album_name,song,artist):
         self._execute("update meta set album_name=%s where song=%s and artist=%s", (album_name,song,artist))
+    def update_album_company(self, album_name,company):
+        self._execute("update meta set producer=%s where album_name=%s", (company,album_name))
     def update_artist_info(self,song,artist):
         self._execute("update meta set artist=%s where song=%s and artist='' ", (artist,song))
      
