@@ -62,9 +62,15 @@ class Tiedb(Mydb):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_163music where title=%s and artist=%s limit 1', (song, artist))
     def get_song_album_id_163music(self,song, artist):
         return self._query_row('select album_id from song_info_163music where title=%s and artist=%s limit 1', (song, artist))
+    
     def get_album_company_by_id_163music(self,id):
         return self._query_row('select company from album_info_163music where id=%s', (id, ))
     
+    def get_song_album_id_qqmusic(self,song, artist):
+        return self._query_row('select album_id from song_info_qqmusic where title=%s and artist=%s limit 1', (song, artist))
+    
+    def get_album_company_by_id_qqmusic(self,id):
+        return self._query_row('select company from album_info_qqmusic where id=%s', (id, ))
     def get_song_info_deezer(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_deezer where title=%s and artist=%s limit 1', (song, artist))
 
