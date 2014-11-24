@@ -64,7 +64,7 @@ class Meta(Mydb):
     def update_album_info(self, album_name,song,artist):
         self._execute("update meta set album_name=%s where song=%s and artist=%s", (album_name,song,artist))
     def update_artist_info(self,song,artist):
-        self._execute("update meta set artist=%s where song=%s", (artist,song))
+        self._execute("update meta set artist=%s where song=%s and artist='' ", (artist,song))
      
 
         
@@ -85,10 +85,10 @@ if __name__ == "__main__":
         print '处理前:',lrow[0].decode('gbk'),lrow[1].decode('gbk'),'index:',index
         try:
             song=lrow[0].decode('gbk').encode('UTF-8')
-            song==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
+            song=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
 
             artist=lrow[1].decode('gbk').encode('UTF-8')
-            artist==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
+            artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
             song_info=mydb.get_song_info_qqmusic(song,artist)
             print '处理后：',song,artist            
 
