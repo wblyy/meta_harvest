@@ -57,6 +57,8 @@ class Tiedb(Mydb):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_qqmusic where title=%s and artist=%s limit 1', (song, artist))
     def get_song_info_163music(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_163music where title=%s and artist=%s limit 1', (song, artist))
+    def get_song_info_deezer(self,song, artist):
+        return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_deezer where title=%s and artist=%s limit 1', (song, artist))
 
     def get_lyric(self, song_id):
         return self._query_row('select lyric from lyrics where song_id=%s', (song_id, ))
@@ -99,11 +101,11 @@ if __name__ == "__main__":
                 artists=re.split(r',',artist)
                 for performer in artists:
                     print '分割后：',song,performer.decode('utf-8')
-                    song_info=mydb.get_song_info_163music(song,performer.decode('utf-8').encode('UTF-8'))
+                    song_info=mydb.get_song_info_deezer(song,performer.decode('utf-8').encode('UTF-8'))
                 
 
             else:            
-                song_info=mydb.get_song_info_163music(song,artist)
+                song_info=mydb.get_song_info_deezer(song,artist)
 
             if song_info:
                 album_id=song_info[0]
