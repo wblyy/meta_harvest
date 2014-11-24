@@ -50,6 +50,9 @@ class Tiedb(Mydb):
         return self._query_row('select company,publishDate from album_info where id=%s', (album_id, ))
     def get_song_info_xiami(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_xiami where title=%s and artist=%s limit 1', (song, artist))
+    def get_proxim_song_info_xiami(self,song, artist):
+        return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_xiami where title like %s and artist like %s limit 1', (song, artist))
+    
     def get_song_info_qqmusic(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_qqmusic where title=%s and artist=%s limit 1', (song, artist))
     def get_lyric(self, song_id):
@@ -89,22 +92,31 @@ if __name__ == "__main__":
 
             artist=lrow[1].decode('gbk').encode('UTF-8')
             artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
-            song_info=mydb.get_song_info_xiami(song,artist)
-            print '处理后：',song,artist            
+            if ',' in artist:#表演者中若存在逗号，则分割之
+                artists=re.split(r',',s)
+                for performer in artists:
+                    print '分割后：',song,performer.decode('utf-8')
+                    song_info=mydb.get_proxim_song_info_xiami(song,performer.decode('utf-8').encode('UTF-8'))
+                
 
-            album_id=song_info[0]
-            album_name=song_info[1]
-            download_url=song_info[2]
-            lyricid=song_info[3]
-            song_id=song_info[4]
-            print album_id,album_name,download_url,lyricid,song_id,'index_full:',index_full
-            meta.update_album_info(album_name,song,artist)
+            else:            
+                song_info=mydb.get_song_info_xiami(song,artist)
+
+            if song_info:
+                album_id=song_info[0]
+                album_name=song_info[1]
+                download_url=song_info[2]
+                lyricid=song_info[3]
+                song_id=song_info[4]
+                print album_id,album_name,download_url,lyricid,song_id,'index_full:',index_full
+                meta.update_album_info(album_name,song,artist)
             #album_info=mydb.get_album_info(album_id)
             #company=album_info[0]
             #publishDate=album_info[1]
             #if company:
-            index_full=index_full+1
-
+                index_full=index_full+1
+            else:
+                index_error=index_error+1
             #lyric=mydb.get_lyric(song_id)[0]
 
             #print album_id,album_name,download_url,lyricid,song_id,company,publishDate,'index_full:',index_full
