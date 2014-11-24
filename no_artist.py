@@ -5,6 +5,7 @@ import MySQLdb
 import sys
 from mydb import Tiedb
 from mydb import Meta
+import re
 
 
 mydb = Tiedb()

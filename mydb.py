@@ -3,6 +3,7 @@ import random
 import csv
 import MySQLdb
 import sys
+import re
 
 class Mydb(object):
     def __init__(self, user, passwd, dbname):
