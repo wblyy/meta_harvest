@@ -93,7 +93,7 @@ if __name__ == "__main__":
             artist=lrow[1].decode('gbk').encode('UTF-8')
             artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
             if ',' in artist:#表演者中若存在逗号，则分割之
-                artists=re.split(r',',s)
+                artists=re.split(r',',artist)
                 for performer in artists:
                     print '分割后：',song,performer.decode('utf-8')
                     song_info=mydb.get_proxim_song_info_xiami(song,performer.decode('utf-8').encode('UTF-8'))
