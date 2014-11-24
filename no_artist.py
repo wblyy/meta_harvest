@@ -26,6 +26,7 @@ for lrow in list(reader):
         song=lrow[0].decode('gbk').encode('UTF-8')
         song==re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
         song_info=mydb.get_artist_xiami(song)
+        aritst=song_info[0]
         print '处理后：',song,artist            
         meta.update_artist_info(song,artist)
         index_full=index_full+1
