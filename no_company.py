@@ -37,7 +37,7 @@ for lrow in list(reader):
             album_company=mydb.get_album_company_by_id_163music(str(aid))
 
         print album_company
-        meta.update_album_company_by_song(song,artist,album_company)
+        meta.update_album_company_by_song(song,artist,album_company.decode('utf-8').encode('UTF-8'))
         print 'done'
         
 
