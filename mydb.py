@@ -98,6 +98,9 @@ class Meta(Mydb):
         self._execute("update meta set producer=%s where album_name=%s", (company,album_name))
     def update_artist_info(self,song,artist):
         self._execute("update meta set artist=%s where song=%s and artist='' ", (artist,song))
+    def update_lyric_path_by_song(self,song,artist,lyric_path):
+        self._execute("update meta set lyric_path=%s where song=%s and artist=%s", (lyric_path,song,artist))  
+    #update_lyric_path_by_song
      
 
         
