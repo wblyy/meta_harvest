@@ -27,7 +27,7 @@ for lrow in list(reader):
     try:
         song=lrow[0].decode('gbk').encode('UTF-8')
         song=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
-        song=song[0:len(song)/3]
+        song=song[0:2]
 
         artist=lrow[1].decode('gbk').encode('UTF-8')
         artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
