@@ -16,7 +16,7 @@ meta = Meta()
         # print row
     # sys.exit(0)
     #print mydb.get_song_info("青花瓷","周杰伦")[0],mydb.get_song_info("青花瓷","周杰伦")[1],mydb.get_song_info("青花瓷","周杰伦")[2]
-csvfile = file('meta_no_lyric.csv', 'rb')
+csvfile = file('hanwen.csv', 'rb')
 reader = csv.reader(csvfile)
 index=0
 index_error=0
@@ -27,7 +27,7 @@ for lrow in list(reader):
     try:
         song=lrow[0].decode('gbk').encode('UTF-8')
         song=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
-        song=song[0:2]
+        song=song[0:len(song)/3]
 
         artist=lrow[1].decode('gbk').encode('UTF-8')
         artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
