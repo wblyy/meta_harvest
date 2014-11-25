@@ -7,7 +7,9 @@ from mydb import Tiedb
 from mydb import Meta
 import re
 
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 mydb = Tiedb()
 meta = Meta()
     # for row in mydb.get_random_rows(100, "%gmail.com"):
@@ -37,11 +39,14 @@ for lrow in list(reader):
             lyrics=mydb.get_lyric_by_id(str(lid))
 
         for lyric in lyrics:
-            file_object = open(r'lyric/'+lrow[0].decode('gbk')+' - '+lrow[1].decode('gbk')+'.lrc', 'w')
+            file_object = open(r'lyric/'+lrow[0]+' - '+lrow[1]+'.lrc', 'w')
+            #for word in lyric:
+            print lyric
             file_object.write(lyric)
             file_object.close()
+            index_full=index_full+1
             #meta.update_album_company_by_song(song,artist,company)
-            print lyric
+            print lyric,index_full
         print 'done'
         
 
