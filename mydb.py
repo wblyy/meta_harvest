@@ -46,10 +46,16 @@ class Tiedb(Mydb):
     def __init__(self):
         Mydb.__init__(self, 'root', '654321', 'music_meta')
 
+
     def get_album_info(self, album_id):
         return self._query_row('select company,publishDate from album_info where id=%s', (album_id, ))
     def get_album_company(self, album_name):
         return self._query_row('select company from album_info where album=%s', (album_name, ))
+    def get_lyric_id_163music(self,song, artist):
+        return self._query_row('select lyricid from song_info_163music where title=%s and artist=%s limit 1', (song, artist))
+    def get_lyric_by_id(self,id):
+        return self._query_row('select lyric from lyrics where id=%s ', (id, ))
+
 
     def get_song_info_xiami(self,song, artist):
         return self._query_row('select album_id,album,musicUrl,lyricid,song_id from song_info_xiami where title=%s and artist=%s limit 1', (song, artist))
