@@ -27,13 +27,14 @@ for lrow in list(reader):
     try:
         song=lrow[0].decode('gbk').encode('UTF-8')
         song=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',song)#去括号
+        song=song[0:len(song)/3]
 
         artist=lrow[1].decode('gbk').encode('UTF-8')
         artist=re.sub('\(.*?\)|\[.*?]|{.*?}|（.*?）','',artist)#去括号
 
         #album=lrow[2].decode('gbk').encode('UTF-8')
         #print album
-        lyric_id=mydb.get_lyric_id_qqmusic(song)
+        lyric_id=mydb.get_lyric_id_china(song)
         for lid in lyric_id:
             print lid
             lyrics=mydb.get_lyric_by_id(str(lid))
