@@ -41,11 +41,12 @@ for lrow in list(reader):
         for lyric in lyrics:
             file_object = open(r'lyric/'+lrow[0]+' - '+lrow[1]+'.lrc', 'w')
             #for word in lyric:
-            print lyric
+            #print lyric
             file_object.write(lyric)
             file_object.close()
+            lyric_path=song+' - '+artist+'.lrc'
             index_full=index_full+1
-            #meta.update_album_company_by_song(song,artist,company)
+            meta.update_lyric_path_by_song(lrow[0].decode('gbk').encode('UTF-8'),lrow[1].decode('gbk').encode('UTF-8'),lyric_path)
             print lyric,index_full
         print 'done'
         
