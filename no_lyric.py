@@ -37,7 +37,7 @@ for lrow in list(reader):
             lyrics=mydb.get_lyric_by_id(str(lid))
 
         for lyric in lyrics:
-            file_object = open(r'lyric/'+song+' - '+artist+'.lrc', 'w')
+            file_object = open(r'lyric/'+lrow[0].decode('gbk')+' - '+lrow[1].decode('gbk')+'.lrc', 'w')
             file_object.write(lyric)
             file_object.close()
             #meta.update_album_company_by_song(song,artist,company)
