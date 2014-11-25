@@ -53,6 +53,12 @@ class Tiedb(Mydb):
         return self._query_row('select company from album_info where album=%s', (album_name, ))
     def get_lyric_id_163music(self,song):
         return self._query_row('select lyricid from song_info_163music where title=%s limit 1', (song,))
+        #song_info_china
+    def get_lyric_id_china(self,song):
+        return self._query_row('select lyricid from song_info_china where title like "'+song+'%" limit 1')
+
+    def get_lyric_id_163music(self,song):
+        return self._query_row('select lyricid from song_info_163music where title=%s limit 1', (song,))
     def get_lyric_id_qqmusic(self,song):
         return self._query_row('select lyricid from song_info_qqmusic where title=%s limit 1', (song,))
     def get_lyric_id_xiami(self,song):

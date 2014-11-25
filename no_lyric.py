@@ -33,7 +33,7 @@ for lrow in list(reader):
 
         #album=lrow[2].decode('gbk').encode('UTF-8')
         #print album
-        lyric_id=mydb.get_lyric_id_qqmusic(song)
+        lyric_id=mydb.get_lyric_id_china(song)
         for lid in lyric_id:
             print lid
             lyrics=mydb.get_lyric_by_id(str(lid))
