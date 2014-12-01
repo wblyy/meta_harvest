@@ -111,7 +111,7 @@ class Meta(Mydb):
     def update_lyric_path_by_song(self,song,artist,lyric_path):
         self._execute("update meta set lyric_path=%s where song=%s and artist=%s", (lyric_path,song,artist))  
     def update_album_img_path(self, cover_name,album_name):
-        self._execute("update meta set update_album_img_path=%s where album_name=%s", (cover_name,album_name))    
+        self._execute("update meta set album_img_path=%s where album_name=%s", (cover_name,album_name))    
     #update_lyric_path_by_song
      
 
