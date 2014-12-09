@@ -14,7 +14,7 @@ class Mydb(object):
 
     @property
     def db(self):
-        return MySQLdb.connect("soniegg.oicp.net", self.user, self.passwd, self.dbname, charset='utf8')
+        return MySQLdb.connect("localhost", self.user, self.passwd, self.dbname, charset='utf8')
 
     @classmethod
     def instance(cls):
