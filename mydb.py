@@ -14,7 +14,7 @@ class Mydb(object):
 
     @property
     def db(self):
-        return MySQLdb.connect("localhost", self.user, self.passwd, self.dbname, charset='utf8')
+        return MySQLdb.connect("soniegg.oicp.net", self.user, self.passwd, self.dbname, charset='utf8')
 
     @classmethod
     def instance(cls):
@@ -99,6 +99,9 @@ class Tiedb(Mydb):
 class Meta(Mydb):
     def __init__(self):
         Mydb.__init__(self, 'root', '654321', 'metadata')
+
+    def insert_data(self, song, artist):
+        self._execute('insert ignore meta_new (song, artist) values (%s, %s)', (song, artist))
 
     def update_album_info(self, album_name,song,artist):
         self._execute("update meta set album_name=%s where song=%s and artist=%s", (album_name,song,artist))
