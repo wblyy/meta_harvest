@@ -30,8 +30,14 @@ for lrow in list(reader):
         #print '处理后：',song,artist
         #song_info=mydb.get_artist_xiami(song)
         #artist=song_info[0]
-        #print '处理后：',song,artist            
-        meta.insert_data(song,artist)
+        #print '处理后：',song,artist  
+        song_info=mydb.get_song_info_163music(song,artist)
+        album_id=song_info[0]
+        album=song_info[1]
+        musicUrl=song_info[2]
+        lyricid=song_info[3]
+
+        meta.update_songinfo(song,artist,album_id,album,musicUrl,lyricid)
         index_full=index_full+1
         print index_full
 
